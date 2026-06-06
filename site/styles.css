@@ -71,6 +71,9 @@ img,svg{display:block;max-width:100%}
   box-shadow:var(--shadow-1);
 }
 .logo{display:flex;align-items:center;gap:9px;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}
+.logo-img{height:38px;width:auto;display:block;flex-shrink:0;object-fit:contain}
+.logo-img-light{filter:brightness(0) invert(1)}
+.footer .logo-img{height:48px}
 .logo-mark{width:24px;height:30px;flex-shrink:0}
 .logo-stack{
   display:flex;flex-direction:column;
