@@ -64,11 +64,45 @@ const countObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 document.querySelectorAll('.stat-num[data-target]').forEach(el => countObserver.observe(el));
 
-// Pause AI marquee on hover
-document.querySelectorAll('.ai-marquee').forEach(m => {
-  m.addEventListener('mouseenter', () => m.querySelectorAll('.ai-track').forEach(t => t.style.animationPlayState = 'paused'));
-  m.addEventListener('mouseleave', () => m.querySelectorAll('.ai-track').forEach(t => t.style.animationPlayState = 'running'));
-});
+// WhatsApp chat loop
+const chat = document.getElementById('chat');
+const conversation = [
+  { type: 'them', text: 'Olá! Vi o anúncio do apto 2 dorms no Brooklin 👋' },
+  { type: 'typing' },
+  { type: 'me', text: 'Oi! Aqui é a Sofia, do time da Imobiliária. Que bom te ver por aqui 😊 Posso te chamar pelo nome?' },
+  { type: 'them', text: 'Pedro' },
+  { type: 'me', text: 'Pedro, esse aptô tá com proposta esta semana. Posso te passar 3 opções parecidas, na sua faixa de preço, hoje?' },
+  { type: 'them', text: 'Manda. Até 850k' },
+  { type: 'typing' },
+  { type: 'me', text: '✅ Anotei. 3 opções saindo + agendamento de visita pro corretor Caio. Te ligo em 9 min.' }
+];
+
+function renderMessage(item) {
+  const div = document.createElement('div');
+  if (item.type === 'typing') {
+    div.className = 'msg msg-typing';
+    div.innerHTML = '<span></span><span></span><span></span>';
+  } else {
+    div.className = `msg msg-${item.type}`;
+    div.textContent = item.text;
+  }
+  chat.appendChild(div);
+}
+
+async function playChat() {
+  if (!chat) return;
+  while (true) {
+    chat.innerHTML = '';
+    for (const item of conversation) {
+      renderMessage(item);
+      const last = chat.lastChild;
+      await new Promise(r => setTimeout(r, item.type === 'typing' ? 1200 : 1100));
+      if (item.type === 'typing') last.remove();
+    }
+    await new Promise(r => setTimeout(r, 2400));
+  }
+}
+playChat();
 
 // Form mock submit
 function handleSubmit(form) {
