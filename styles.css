@@ -111,23 +111,29 @@ img,svg{display:block;max-width:100%}
 .btn-lg{padding:16px 28px;font-size:16px}
 .btn-block{width:100%;justify-content:center}
 .btn-primary{
-  background:var(--bg-dark);color:#fff;
-  box-shadow:0 4px 14px rgba(0,0,0,0.18);
+  background:linear-gradient(135deg,#FFB020,#FF8A1F);
+  color:#1A0F00;
+  box-shadow:0 4px 14px rgba(255,140,31,.32);
 }
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,0.25)}
+.btn-primary:hover{
+  background:linear-gradient(135deg,#FFC03A,#FF9933);
+  transform:translateY(-2px);
+  box-shadow:0 10px 26px rgba(255,140,31,.45);
+}
 .btn-ghost{
   background:transparent;color:var(--ink);
   border:1.5px solid var(--ink);
 }
 .btn-ghost:hover{background:var(--ink);color:#fff}
 .btn-dot{
-  width:10px;height:10px;border-radius:50%;background:#fff;
-  box-shadow:0 0 0 4px rgba(255,255,255,.15);
+  width:10px;height:10px;border-radius:50%;
+  background:#1A0F00;
+  box-shadow:0 0 0 4px rgba(26,15,0,.18);
   animation:pulse 1.6s infinite;
 }
 @keyframes pulse{
-  0%,100%{box-shadow:0 0 0 4px rgba(255,255,255,.15)}
-  50%{box-shadow:0 0 0 7px rgba(255,255,255,.05)}
+  0%,100%{box-shadow:0 0 0 4px rgba(26,15,0,.18)}
+  50%{box-shadow:0 0 0 7px rgba(26,15,0,.06)}
 }
 
 .nav-toggle{display:none;flex-direction:column;gap:5px;padding:8px}

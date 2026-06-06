@@ -114,8 +114,8 @@ function handleSubmit(form) {
     form.innerHTML = `
       <div style="text-align:center;padding:24px 12px;">
         <div style="width:56px;height:56px;border-radius:50%;background:#0A0A0A;color:#fff;display:grid;place-items:center;margin:0 auto 18px;font-size:24px;">✓</div>
-        <h3 style="font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;">Diagnóstico solicitado.</h3>
-        <p style="color:#4A4A4A;font-size:15px;max-width:380px;margin:0 auto;">Nosso time vai te chamar no WhatsApp em até <strong>2 horas úteis</strong> pra agendar os 30 minutos. Sem fila, sem robô.</p>
+        <h3 style="font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;">Pedido recebido.</h3>
+        <p style="color:#4A4A4A;font-size:15px;max-width:380px;margin:0 auto;">Nosso time vai te chamar em até <strong>2 horas úteis</strong> pra te mostrar como funciona. Sem fila, sem robô.</p>
       </div>
     `;
   }, 900);
