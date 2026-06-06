@@ -152,8 +152,139 @@ img,svg{display:block;max-width:100%}
   padding:160px 0 100px;
   text-align:center;
   position:relative;
+  overflow:hidden;
+  isolation:isolate;
 }
-.hero-inner{display:flex;flex-direction:column;align-items:center}
+.hero-inner{display:flex;flex-direction:column;align-items:center;position:relative;z-index:3}
+
+/* ========== HERO BACKGROUND MOTION ========== */
+.hero-bg{
+  position:absolute;inset:0;z-index:1;
+  overflow:hidden;pointer-events:none;
+}
+.hero-parallax{
+  position:absolute;inset:0;
+  transform:translate3d(
+    calc(var(--mx,0) * var(--depth,20) * -1px),
+    calc(var(--my,0) * var(--depth,20) * -1px),
+    0
+  );
+  transition:transform .9s cubic-bezier(.2,.8,.2,1);
+  will-change:transform;
+}
+
+/* radial gradients (greys) */
+.hero-grad{
+  position:absolute;border-radius:50%;
+  filter:blur(80px);
+}
+.hero-grad-1{
+  width:620px;height:620px;top:-200px;left:-160px;
+  background:radial-gradient(circle,rgba(120,120,120,.22),transparent 70%);
+  animation:gradFloat1 22s ease-in-out infinite;
+}
+.hero-grad-2{
+  width:520px;height:520px;top:5%;right:-160px;
+  background:radial-gradient(circle,rgba(155,155,155,.18),transparent 70%);
+  animation:gradFloat2 26s ease-in-out infinite;
+}
+.hero-grad-3{
+  width:700px;height:700px;bottom:-260px;left:30%;
+  background:radial-gradient(circle,rgba(100,100,100,.16),transparent 70%);
+  animation:gradFloat3 30s ease-in-out infinite;
+}
+@keyframes gradFloat1{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(60px,40px) scale(1.1)}
+}
+@keyframes gradFloat2{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(-80px,60px) scale(1.06)}
+}
+@keyframes gradFloat3{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(50px,-40px) scale(.94)}
+}
+
+/* SVG animated lines */
+.hero-lines{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  opacity:.7;
+}
+.hl-line-svg{
+  stroke-dasharray:2200;
+  stroke-dashoffset:2200;
+  animation:drawLine 14s ease-in-out infinite;
+}
+.hl-line-svg:nth-of-type(2){animation-delay:-2s}
+.hl-line-svg:nth-of-type(3){animation-delay:-4s}
+.hl-line-svg:nth-of-type(4){animation-delay:-7s}
+@keyframes drawLine{
+  0%{stroke-dashoffset:2200}
+  50%{stroke-dashoffset:0}
+  100%{stroke-dashoffset:-2200}
+}
+
+/* glassmorphism cards */
+.glass-card{
+  position:absolute;
+  background:rgba(255,255,255,.35);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+  backdrop-filter:blur(14px) saturate(140%);
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:20px;
+  box-shadow:0 10px 36px -8px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.8);
+}
+.glass-1{
+  width:190px;height:120px;top:16%;left:6%;
+  animation:floatA 9s ease-in-out infinite;
+}
+.glass-2{
+  width:130px;height:130px;top:60%;left:12%;
+  border-radius:50%;
+  animation:floatB 11s ease-in-out infinite;
+}
+.glass-3{
+  width:220px;height:130px;top:20%;right:5%;
+  animation:floatA 10s ease-in-out infinite reverse;
+}
+.glass-4{
+  width:90px;height:90px;top:66%;right:14%;
+  border-radius:50%;
+  animation:floatB 8s ease-in-out infinite;
+}
+.glass-5{
+  width:110px;height:110px;top:8%;left:46%;
+  border-radius:24px;
+  animation:floatA 12s ease-in-out infinite;
+}
+.glass-6{
+  width:160px;height:80px;bottom:18%;right:30%;
+  animation:floatB 13s ease-in-out infinite reverse;
+}
+@keyframes floatA{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-26px) rotate(2deg)}
+}
+@keyframes floatB{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(22px) rotate(-2deg)}
+}
+
+/* particle canvas */
+.hero-particles{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+}
+
+@media (max-width:768px){
+  .glass-1,.glass-3,.glass-6{display:none}
+  .glass-2{width:90px;height:90px;top:55%;left:6%}
+  .glass-4{width:70px;height:70px;top:62%;right:8%}
+  .glass-5{width:80px;height:80px;top:6%;left:75%}
+  .hero-grad{filter:blur(60px)}
+}
 .eyebrow{
   font-family:'JetBrains Mono',ui-monospace,monospace;
   font-size:12px;letter-spacing:.04em;

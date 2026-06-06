@@ -121,6 +121,96 @@ function handleSubmit(form) {
   }, 900);
 }
 
+// ============================================
+// Hero parallax based on mouse
+// ============================================
+(function() {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  let raf = null, tx = 0, ty = 0;
+  function apply(){
+    hero.style.setProperty('--mx', tx.toFixed(3));
+    hero.style.setProperty('--my', ty.toFixed(3));
+    raf = null;
+  }
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    tx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    ty = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    if (!raf) raf = requestAnimationFrame(apply);
+  });
+  hero.addEventListener('mouseleave', () => {
+    tx = 0; ty = 0;
+    if (!raf) raf = requestAnimationFrame(apply);
+  });
+})();
+
+// ============================================
+// Hero particles
+// ============================================
+(function() {
+  const canvas = document.querySelector('.hero-particles');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let width, height, dpr, particles = [];
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    width = rect.width; height = rect.height;
+    canvas.width = width * dpr; canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function createParticles(n) {
+    particles = [];
+    for (let i = 0; i < n; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 1.6 + 0.4,
+        vy: -(Math.random() * 0.35 + 0.08),
+        vx: (Math.random() - 0.5) * 0.12,
+        a: Math.random() * 0.55 + 0.15,
+        ph: Math.random() * Math.PI * 2,
+      });
+    }
+  }
+
+  let t = 0;
+  function step() {
+    t += 0.016;
+    ctx.clearRect(0, 0, width, height);
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.y < -8) { p.y = height + 8; p.x = Math.random() * width; }
+      if (p.x < -8) p.x = width + 8;
+      if (p.x > width + 8) p.x = -8;
+      const op = p.a * (0.7 + 0.3 * Math.sin(t * 1.2 + p.ph));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(110,110,110,${op.toFixed(3)})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(step);
+  }
+
+  function init() {
+    resize();
+    const count = width < 700 ? 28 : 55;
+    createParticles(count);
+  }
+
+  init();
+  step();
+  let resizeT;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeT);
+    resizeT = setTimeout(init, 200);
+  });
+})();
+
 // Smooth focus for # anchors
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
