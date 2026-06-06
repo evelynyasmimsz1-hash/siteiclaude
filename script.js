@@ -121,12 +121,6 @@ function handleSubmit(form) {
   }, 900);
 }
 
-// Pause AI marquee on hover
-document.querySelectorAll('.ai-marquee').forEach(m => {
-  m.addEventListener('mouseenter', () => m.querySelectorAll('.ai-track').forEach(t => t.style.animationPlayState = 'paused'));
-  m.addEventListener('mouseleave', () => m.querySelectorAll('.ai-track').forEach(t => t.style.animationPlayState = 'running'));
-});
-
 // Smooth focus for # anchors
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
