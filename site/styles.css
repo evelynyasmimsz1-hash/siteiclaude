@@ -70,8 +70,20 @@ img,svg{display:block;max-width:100%}
   padding:10px 10px 10px 22px;
   box-shadow:var(--shadow-1);
 }
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.01em}
-.logo-mark{width:24px;height:24px;flex-shrink:0}
+.logo{display:flex;align-items:center;gap:9px;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}
+.logo-mark{width:24px;height:30px;flex-shrink:0}
+.logo-stack{
+  display:flex;flex-direction:column;
+  line-height:.95;font-weight:800;font-size:15.5px;
+  position:relative;
+}
+.logo-stack .logo-line{display:block;color:var(--ink)}
+.logo-skyline{
+  position:absolute;
+  width:11px;height:24px;
+  top:-15px;right:-4px;
+}
+.logo-stack-light .logo-line{color:#fff}
 .logo-text strong{font-weight:800}
 .logo-text-light{color:#fff}
 .nav-links{display:flex;gap:6px;list-style:none;margin-left:auto}
