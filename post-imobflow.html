@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Imob Flow Lab — Post Institucional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .post {
+    width: 1080px;
+    height: 1350px;
+    background: #FFFFFF;
+    position: relative;
+    padding: 90px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transform-origin: top center;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+  }
+
+  /* Escala automática pra caber na tela */
+  @media (max-width: 1200px) {
+    .post { transform: scale(0.6); margin: -270px 0; }
+  }
+  @media (max-width: 800px) {
+    .post { transform: scale(0.35); margin: -440px 0; }
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .logo-icon {
+    width: 64px;
+    height: 64px;
+    background: #0A0A0A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
+
+  .logo-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: #FFD60A;
+  }
+
+  .logo-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: #0A0A0A;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+
+  .logo-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #6B6B6B;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .headline {
+    font-family: 'Anton', sans-serif;
+    font-size: 132px;
+    line-height: 0.95;
+    color: #0A0A0A;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    margin-top: 60px;
+  }
+
+  .highlight {
+    background: #FFD60A;
+    padding: 0 12px;
+    display: inline-block;
+    transform: rotate(-1deg);
+  }
+
+  .subtext {
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    line-height: 1.4;
+    color: #2A2A2A;
+    font-weight: 400;
+    max-width: 780px;
+    margin-top: 40px;
+  }
+
+  .subtext strong {
+    font-weight: 700;
+    color: #0A0A0A;
+  }
+
+  .divider {
+    height: 2px;
+    background: #0A0A0A;
+    margin: 50px 0 40px 0;
+    width: 100%;
+  }
+
+  .stats {
+    display: flex;
+    gap: 0;
+    align-items: center;
+  }
+
+  .stat {
+    flex: 1;
+    padding: 0 20px;
+  }
+
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { padding-right: 0; }
+
+  .stat-divider {
+    width: 2px;
+    height: 140px;
+    background: #0A0A0A;
+  }
+
+  .stat-number {
+    font-family: 'Anton', sans-serif;
+    font-size: 150px;
+    line-height: 1;
+    color: #0A0A0A;
+    letter-spacing: -3px;
+  }
+
+  .stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: #6B6B6B;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    margin-top: 12px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #E5E5E5;
+  }
+
+  .footer-left {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #6B6B6B;
+    font-weight: 500;
+  }
+
+  .footer-right {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: #0A0A0A;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bolt {
+    color: #FFD60A;
+    font-size: 22px;
+  }
+</style>
+</head>
+<body>
+
+<div class="post">
+
+  <!-- TOPO: Logo + Tag -->
+  <div class="top">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg>
+      </div>
+      <div>
+        <div class="logo-text">Imob Flow Lab</div>
+        <div class="logo-tag">HUB DE I.A. PARA IMOBILIÁRIAS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADLINE -->
+  <div>
+    <h1 class="headline">
+      A imobiliária<br>
+      que não automatiza<br>
+      hoje, vira<br>
+      <span class="highlight">espectadora</span><br>
+      amanhã.
+    </h1>
+
+    <p class="subtext">
+      Construímos <strong>Estruturas de I.A.</strong> que atendem, qualificam, agendam e fazem follow-up <strong>24h por dia</strong> — lado a lado com sua equipe comercial.
+    </p>
+  </div>
+
+  <!-- STATS + FOOTER -->
+  <div>
+    <div class="divider"></div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number">10x</div>
+        <div class="stat-label">+ Produtividade</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <div class="stat-number">65%</div>
+        <div class="stat-label">+ Crescimento</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Atendimento</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">imobflowlab.com.br</div>
+      <div class="footer-right">
+        <span class="bolt">⚡</span>
+        @imobflowlab
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
