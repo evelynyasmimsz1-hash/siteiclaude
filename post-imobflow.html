@@ -2,61 +2,72 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Imob Flow Lab — Post Feed Instagram</title>
+<title>Imob Flow Lab — Post Feed Instagram 4:5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: #1a1a1a;
+  html, body {
+    background: #2a2a2a;
     min-height: 100vh;
+    width: 100%;
+  }
+
+  body {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     padding: 40px 20px;
     font-family: 'Inter', sans-serif;
   }
 
-  /* Formato Instagram Feed: 1080x1350 (proporção 4:5) */
+  /* Container que mantém proporção 4:5 perfeita */
+  .post-wrapper {
+    width: 100%;
+    max-width: 1080px;
+    aspect-ratio: 4 / 5;
+    position: relative;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+  }
+
   .post {
     width: 1080px;
     height: 1350px;
     background: #FFFFFF;
-    position: relative;
-    padding: 80px 80px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 90px 80px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+    transform-origin: top left;
     overflow: hidden;
   }
 
-  /* Escala automática pra preview */
-  @media (max-width: 1200px) {
-    .post { transform: scale(0.6); transform-origin: top center; margin-bottom: -540px; }
-  }
-  @media (max-width: 800px) {
-    .post { transform: scale(0.35); transform-origin: top center; margin-bottom: -880px; }
+  /* Escala automática mantendo 4:5 */
+  @media (max-width: 1120px) {
+    .post { transform: scale(calc(100vw / 1120)); }
+    .post-wrapper { max-width: calc(100vw - 40px); }
   }
 
-  /* Detalhe gráfico no canto */
-  .corner-decoration {
+  /* Linha decorativa preta no topo */
+  .top-line {
     position: absolute;
     top: 0;
-    right: 0;
-    width: 200px;
-    height: 200px;
-    background: #FFD60A;
-    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    left: 0;
+    width: 100%;
+    height: 14px;
+    background: #0A0A0A;
   }
 
-  /* TOPO: Logo Imob Flow Lab */
+  /* TOPO: Logo */
   .logo-wrapper {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 22px;
     position: relative;
     z-index: 2;
   }
@@ -71,56 +82,54 @@
     display: flex;
     flex-direction: column;
     line-height: 0.95;
-    position: relative;
   }
 
   .logo-imob {
     font-family: 'Inter', sans-serif;
     font-weight: 800;
-    font-size: 38px;
+    font-size: 40px;
     color: #0A0A0A;
-    letter-spacing: -1px;
+    letter-spacing: -1.2px;
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: 10px;
   }
 
   .logo-flow {
     font-family: 'Inter', sans-serif;
     font-weight: 800;
-    font-size: 38px;
+    font-size: 40px;
     color: #0A0A0A;
-    letter-spacing: -1px;
+    letter-spacing: -1.2px;
   }
 
   .building-icon {
-    width: 28px;
-    height: 36px;
+    width: 30px;
+    height: 38px;
     margin-top: -2px;
   }
 
-  /* CENTRO: Headline */
+  /* CONTEÚDO CENTRAL */
   .content {
-    margin-top: 60px;
+    margin-top: 50px;
   }
 
   .label {
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    color: #6B6B6B;
+    font-size: 15px;
+    color: #FFFFFF;
+    background: #0A0A0A;
     letter-spacing: 3px;
     text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 30px;
+    font-weight: 700;
+    margin-bottom: 35px;
     display: inline-block;
-    padding: 8px 16px;
-    border: 2px solid #0A0A0A;
-    border-radius: 4px;
+    padding: 10px 18px;
   }
 
   .headline {
     font-family: 'Anton', sans-serif;
-    font-size: 120px;
+    font-size: 122px;
     line-height: 0.92;
     color: #0A0A0A;
     letter-spacing: -2px;
@@ -128,11 +137,12 @@
   }
 
   .highlight {
-    background: #FFD60A;
-    padding: 0 16px 4px 16px;
+    position: relative;
     display: inline-block;
-    transform: rotate(-1.5deg);
-    margin: 8px 0;
+    color: #FFFFFF;
+    background: #0A0A0A;
+    padding: 0 18px 6px 18px;
+    margin: 6px 0;
   }
 
   .subtext {
@@ -148,10 +158,10 @@
   .subtext strong {
     font-weight: 700;
     color: #0A0A0A;
-    background: linear-gradient(180deg, transparent 60%, #FFD60A 60%);
+    border-bottom: 3px solid #0A0A0A;
   }
 
-  /* RODAPÉ: Stats + assinatura */
+  /* RODAPÉ */
   .bottom {
     position: relative;
     z-index: 2;
@@ -160,7 +170,7 @@
   .divider {
     height: 2px;
     background: #0A0A0A;
-    margin-bottom: 40px;
+    margin-bottom: 42px;
   }
 
   .stats {
@@ -189,7 +199,7 @@
     text-transform: uppercase;
     letter-spacing: 1.5px;
     font-weight: 600;
-    margin-top: 8px;
+    margin-top: 10px;
   }
 
   .stat-separator {
@@ -211,9 +221,6 @@
     font-size: 22px;
     color: #0A0A0A;
     font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 10px;
   }
 
   .footer-tag {
@@ -224,98 +231,108 @@
     text-transform: uppercase;
     font-weight: 600;
   }
+
+  /* Indicador de proporção (não aparece no print) */
+  .ratio-badge {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    z-index: 100;
+  }
 </style>
 </head>
 <body>
 
-<div class="post">
+<div class="post-wrapper">
+  <div class="post">
 
-  <!-- Detalhe gráfico amarelo no canto -->
-  <div class="corner-decoration"></div>
+    <!-- Linha preta decorativa no topo -->
+    <div class="top-line"></div>
 
-  <!-- LOGO IMOB FLOW LAB -->
-  <div class="logo-wrapper">
-    <!-- Símbolo da logo (seta/diamante estilizado) -->
-    <svg class="logo-symbol" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <!-- Linha vertical central -->
-      <rect x="42" y="10" width="16" height="80" fill="#0A0A0A"/>
-      <!-- Seta superior (triângulo apontando pra cima) -->
-      <polygon points="20,28 80,28 50,8" fill="#0A0A0A"/>
-      <!-- Linha horizontal superior -->
-      <rect x="20" y="32" width="60" height="10" fill="#0A0A0A"/>
-      <!-- Linha horizontal meio -->
-      <rect x="25" y="52" width="50" height="8" fill="#0A0A0A"/>
-    </svg>
+    <!-- LOGO -->
+    <div class="logo-wrapper">
+      <svg class="logo-symbol" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect x="42" y="10" width="16" height="80" fill="#0A0A0A"/>
+        <polygon points="20,28 80,28 50,8" fill="#0A0A0A"/>
+        <rect x="20" y="32" width="60" height="10" fill="#0A0A0A"/>
+        <rect x="25" y="52" width="50" height="8" fill="#0A0A0A"/>
+      </svg>
 
-    <!-- Texto Imob Flow Lab com prédio -->
-    <div class="logo-text-block">
-      <div class="logo-imob">
-        Imob
-        <svg class="building-icon" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="8" width="20" height="28" fill="#0A0A0A"/>
-          <polygon points="2,8 12,0 22,8" fill="#0A0A0A"/>
-          <rect x="6" y="14" width="3" height="3" fill="#FFFFFF"/>
-          <rect x="12" y="14" width="3" height="3" fill="#FFFFFF"/>
-          <rect x="18" y="14" width="3" height="3" fill="#FFFFFF"/>
-          <rect x="6" y="20" width="3" height="3" fill="#FFFFFF"/>
-          <rect x="12" y="20" width="3" height="3" fill="#FFFFFF"/>
-          <rect x="18" y="20" width="3" height="3" fill="#FFFFFF"/>
-          <rect x="6" y="26" width="3" height="3" fill="#FFFFFF"/>
-          <rect x="12" y="26" width="3" height="3" fill="#FFFFFF"/>
-          <rect x="18" y="26" width="3" height="3" fill="#FFFFFF"/>
-        </svg>
-      </div>
-      <div class="logo-flow">Flow Lab</div>
-    </div>
-  </div>
-
-  <!-- CONTEÚDO CENTRAL -->
-  <div class="content">
-    <div class="label">HUB DE I.A. PARA IMOBILIÁRIAS</div>
-
-    <h1 class="headline">
-      A imobiliária<br>
-      que não automatiza<br>
-      hoje, vira<br>
-      <span class="highlight">espectadora</span><br>
-      amanhã.
-    </h1>
-
-    <p class="subtext">
-      Construímos <strong>Estruturas de I.A.</strong> que atendem, qualificam, agendam e fazem follow-up <strong>24h por dia</strong> — lado a lado com sua equipe comercial.
-    </p>
-  </div>
-
-  <!-- RODAPÉ -->
-  <div class="bottom">
-    <div class="divider"></div>
-
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-number">10x</div>
-        <div class="stat-label">+ Produtividade</div>
-      </div>
-      <div class="stat-separator"></div>
-      <div class="stat">
-        <div class="stat-number">65%</div>
-        <div class="stat-label">+ Crescimento</div>
-      </div>
-      <div class="stat-separator"></div>
-      <div class="stat">
-        <div class="stat-number">24/7</div>
-        <div class="stat-label">Atendimento</div>
+      <div class="logo-text-block">
+        <div class="logo-imob">
+          Imob
+          <svg class="building-icon" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="8" width="20" height="28" fill="#0A0A0A"/>
+            <polygon points="2,8 12,0 22,8" fill="#0A0A0A"/>
+            <rect x="6" y="14" width="3" height="3" fill="#FFFFFF"/>
+            <rect x="12" y="14" width="3" height="3" fill="#FFFFFF"/>
+            <rect x="18" y="14" width="3" height="3" fill="#FFFFFF"/>
+            <rect x="6" y="20" width="3" height="3" fill="#FFFFFF"/>
+            <rect x="12" y="20" width="3" height="3" fill="#FFFFFF"/>
+            <rect x="18" y="20" width="3" height="3" fill="#FFFFFF"/>
+            <rect x="6" y="26" width="3" height="3" fill="#FFFFFF"/>
+            <rect x="12" y="26" width="3" height="3" fill="#FFFFFF"/>
+            <rect x="18" y="26" width="3" height="3" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <div class="logo-flow">Flow Lab</div>
       </div>
     </div>
 
-    <div class="footer">
-      <div class="footer-handle">
-        @imobflowlab
-      </div>
-      <div class="footer-tag">DM ABERTA · PRÓXIMOS CASES</div>
-    </div>
-  </div>
+    <!-- CONTEÚDO -->
+    <div class="content">
+      <div class="label">HUB DE I.A. PARA IMOBILIÁRIAS</div>
 
+      <h1 class="headline">
+        A imobiliária<br>
+        que não automatiza<br>
+        hoje, vira<br>
+        <span class="highlight">espectadora</span><br>
+        amanhã.
+      </h1>
+
+      <p class="subtext">
+        Construímos <strong>Estruturas de I.A.</strong> que atendem, qualificam, agendam e fazem follow-up <strong>24h por dia</strong> — lado a lado com sua equipe comercial.
+      </p>
+    </div>
+
+    <!-- RODAPÉ -->
+    <div class="bottom">
+      <div class="divider"></div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number">10x</div>
+          <div class="stat-label">+ Produtividade</div>
+        </div>
+        <div class="stat-separator"></div>
+        <div class="stat">
+          <div class="stat-number">65%</div>
+          <div class="stat-label">+ Crescimento</div>
+        </div>
+        <div class="stat-separator"></div>
+        <div class="stat">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Atendimento</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-handle">@imobflowlab</div>
+        <div class="footer-tag">DM ABERTA · PRÓXIMOS CASES</div>
+      </div>
+    </div>
+
+  </div>
 </div>
+
+<div class="ratio-badge">1080 × 1350 · 4:5 Instagram Feed</div>
 
 </body>
 </html>
