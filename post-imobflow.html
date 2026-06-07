@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Imob Flow Lab — Post Feed Instagram 4:5</title>
+<title>Imob Flow Lab — Background 4:5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -23,7 +23,6 @@
     font-family: 'Inter', sans-serif;
   }
 
-  /* Container que mantém proporção 4:5 perfeita */
   .post-wrapper {
     width: 100%;
     max-width: 1080px;
@@ -35,47 +34,89 @@
   .post {
     width: 1080px;
     height: 1350px;
-    background: #FFFFFF;
+    background: #F5F3EE;
     position: absolute;
     top: 0;
     left: 0;
-    padding: 90px 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transform-origin: top left;
     overflow: hidden;
+    transform-origin: top left;
   }
 
-  /* Escala automática mantendo 4:5 */
   @media (max-width: 1120px) {
     .post { transform: scale(calc(100vw / 1120)); }
     .post-wrapper { max-width: calc(100vw - 40px); }
   }
 
-  /* Linha decorativa preta no topo */
-  .top-line {
+  /* ===== CAMADA 1: Grid sutil de fundo ===== */
+  .grid-pattern {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 14px;
-    background: #0A0A0A;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(10,10,10,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10,10,10,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 1;
   }
 
-  /* TOPO: Logo */
-  .logo-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    position: relative;
+  /* ===== CAMADA 2: Forma geométrica grande (silhueta de prédios) ===== */
+  .skyline {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 380px;
+    z-index: 2;
+    opacity: 0.07;
+  }
+
+  /* ===== CAMADA 3: Arco/Círculo decorativo grande ===== */
+  .deco-circle {
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    border: 2px solid rgba(10,10,10,0.08);
     z-index: 2;
   }
 
+  .deco-circle-inner {
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 2px solid rgba(10,10,10,0.06);
+    z-index: 2;
+  }
+
+  /* ===== CAMADA 4: Barra preta lateral ===== */
+  .side-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 100%;
+    background: #0A0A0A;
+    z-index: 3;
+  }
+
+  /* ===== CAMADA 5: Logo no topo ===== */
+  .logo-area {
+    position: absolute;
+    top: 70px;
+    left: 80px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    z-index: 10;
+  }
+
   .logo-symbol {
-    width: 90px;
-    height: 90px;
-    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
   }
 
   .logo-text-block {
@@ -87,152 +128,102 @@
   .logo-imob {
     font-family: 'Inter', sans-serif;
     font-weight: 800;
-    font-size: 40px;
+    font-size: 28px;
     color: #0A0A0A;
-    letter-spacing: -1.2px;
+    letter-spacing: -0.8px;
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 7px;
   }
 
   .logo-flow {
     font-family: 'Inter', sans-serif;
     font-weight: 800;
-    font-size: 40px;
+    font-size: 28px;
     color: #0A0A0A;
-    letter-spacing: -1.2px;
+    letter-spacing: -0.8px;
   }
 
   .building-icon {
-    width: 30px;
-    height: 38px;
-    margin-top: -2px;
+    width: 22px;
+    height: 28px;
+    margin-top: -1px;
   }
 
-  /* CONTEÚDO CENTRAL */
-  .content {
-    margin-top: 50px;
-  }
-
-  .label {
+  /* ===== CAMADA 6: Tag superior direita ===== */
+  .top-tag {
+    position: absolute;
+    top: 85px;
+    right: 80px;
     font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    color: #FFFFFF;
-    background: #0A0A0A;
+    font-size: 12px;
+    color: #6B6B6B;
     letter-spacing: 3px;
     text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 35px;
-    display: inline-block;
-    padding: 10px 18px;
-  }
-
-  .headline {
-    font-family: 'Anton', sans-serif;
-    font-size: 122px;
-    line-height: 0.92;
-    color: #0A0A0A;
-    letter-spacing: -2px;
-    text-transform: uppercase;
-  }
-
-  .highlight {
-    position: relative;
-    display: inline-block;
-    color: #FFFFFF;
-    background: #0A0A0A;
-    padding: 0 18px 6px 18px;
-    margin: 6px 0;
-  }
-
-  .subtext {
-    font-family: 'Inter', sans-serif;
-    font-size: 26px;
-    line-height: 1.45;
-    color: #2A2A2A;
-    font-weight: 400;
-    max-width: 820px;
-    margin-top: 50px;
-  }
-
-  .subtext strong {
-    font-weight: 700;
-    color: #0A0A0A;
-    border-bottom: 3px solid #0A0A0A;
-  }
-
-  /* RODAPÉ */
-  .bottom {
-    position: relative;
-    z-index: 2;
-  }
-
-  .divider {
-    height: 2px;
-    background: #0A0A0A;
-    margin-bottom: 42px;
-  }
-
-  .stats {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 50px;
-  }
-
-  .stat {
-    text-align: left;
-  }
-
-  .stat-number {
-    font-family: 'Anton', sans-serif;
-    font-size: 130px;
-    line-height: 1;
-    color: #0A0A0A;
-    letter-spacing: -3px;
-  }
-
-  .stat-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    color: #6B6B6B;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
     font-weight: 600;
-    margin-top: 10px;
+    z-index: 10;
   }
 
-  .stat-separator {
-    width: 2px;
-    height: 130px;
-    background: #E5E5E5;
-  }
-
-  .footer {
+  /* ===== CAMADA 7: Rodapé com handle ===== */
+  .footer-area {
+    position: absolute;
+    bottom: 60px;
+    left: 80px;
+    right: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 30px;
-    border-top: 1px solid #E5E5E5;
+    z-index: 10;
   }
 
-  .footer-handle {
+  .handle {
     font-family: 'Inter', sans-serif;
-    font-size: 22px;
+    font-size: 18px;
     color: #0A0A0A;
     font-weight: 700;
   }
 
   .footer-tag {
     font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     color: #6B6B6B;
     letter-spacing: 2px;
     text-transform: uppercase;
     font-weight: 600;
   }
 
-  /* Indicador de proporção (não aparece no print) */
+  /* ===== CAMADA 8: Marcação de área de texto (guia visual) ===== */
+  .text-area-guide {
+    position: absolute;
+    top: 240px;
+    left: 80px;
+    right: 80px;
+    bottom: 180px;
+    border: 2px dashed rgba(10,10,10,0.2);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .guide-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: rgba(10,10,10,0.3);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 600;
+    background: #F5F3EE;
+    padding: 8px 16px;
+  }
+
+  /* Toggle pra esconder o guia */
+  .hide-guide .text-area-guide {
+    display: none;
+  }
+
+  /* Badge informativa */
   .ratio-badge {
     position: fixed;
     bottom: 20px;
@@ -245,18 +236,91 @@
     font-size: 13px;
     z-index: 100;
   }
+
+  .toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #FFFFFF;
+    color: #0A0A0A;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 100;
+  }
 </style>
 </head>
 <body>
 
 <div class="post-wrapper">
-  <div class="post">
+  <div class="post" id="post">
 
-    <!-- Linha preta decorativa no topo -->
-    <div class="top-line"></div>
+    <!-- Grid sutil -->
+    <div class="grid-pattern"></div>
 
-    <!-- LOGO -->
-    <div class="logo-wrapper">
+    <!-- Círculos decorativos -->
+    <div class="deco-circle"></div>
+    <div class="deco-circle-inner"></div>
+
+    <!-- Skyline silhueta no rodapé -->
+    <svg class="skyline" viewBox="0 0 1080 380" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Prédios variados de fundo -->
+      <rect x="0" y="180" width="80" height="200" fill="#0A0A0A"/>
+      <rect x="80" y="120" width="60" height="260" fill="#0A0A0A"/>
+      <rect x="140" y="200" width="90" height="180" fill="#0A0A0A"/>
+      <rect x="230" y="80" width="70" height="300" fill="#0A0A0A"/>
+      <polygon points="230,80 265,40 300,80" fill="#0A0A0A"/>
+      <rect x="300" y="160" width="100" height="220" fill="#0A0A0A"/>
+      <rect x="400" y="100" width="80" height="280" fill="#0A0A0A"/>
+      <rect x="480" y="190" width="70" height="190" fill="#0A0A0A"/>
+      <rect x="550" y="50" width="90" height="330" fill="#0A0A0A"/>
+      <polygon points="550,50 595,10 640,50" fill="#0A0A0A"/>
+      <rect x="640" y="140" width="80" height="240" fill="#0A0A0A"/>
+      <rect x="720" y="170" width="70" height="210" fill="#0A0A0A"/>
+      <rect x="790" y="90" width="100" height="290" fill="#0A0A0A"/>
+      <rect x="890" y="200" width="80" height="180" fill="#0A0A0A"/>
+      <rect x="970" y="130" width="110" height="250" fill="#0A0A0A"/>
+
+      <!-- Janelas (pontinhos brancos no escuro - mas como tá com opacity, fica sutil) -->
+      <g fill="#F5F3EE">
+        <rect x="15" y="220" width="5" height="5"/>
+        <rect x="35" y="220" width="5" height="5"/>
+        <rect x="55" y="220" width="5" height="5"/>
+        <rect x="15" y="260" width="5" height="5"/>
+        <rect x="35" y="260" width="5" height="5"/>
+        <rect x="95" y="160" width="5" height="5"/>
+        <rect x="115" y="160" width="5" height="5"/>
+        <rect x="95" y="200" width="5" height="5"/>
+        <rect x="115" y="200" width="5" height="5"/>
+        <rect x="245" y="120" width="5" height="5"/>
+        <rect x="265" y="120" width="5" height="5"/>
+        <rect x="245" y="160" width="5" height="5"/>
+        <rect x="265" y="160" width="5" height="5"/>
+        <rect x="425" y="140" width="5" height="5"/>
+        <rect x="445" y="140" width="5" height="5"/>
+        <rect x="425" y="180" width="5" height="5"/>
+        <rect x="565" y="90" width="5" height="5"/>
+        <rect x="595" y="90" width="5" height="5"/>
+        <rect x="565" y="130" width="5" height="5"/>
+        <rect x="595" y="130" width="5" height="5"/>
+        <rect x="815" y="130" width="5" height="5"/>
+        <rect x="845" y="130" width="5" height="5"/>
+        <rect x="815" y="170" width="5" height="5"/>
+        <rect x="995" y="170" width="5" height="5"/>
+        <rect x="1025" y="170" width="5" height="5"/>
+        <rect x="995" y="210" width="5" height="5"/>
+      </g>
+    </svg>
+
+    <!-- Barra preta lateral -->
+    <div class="side-bar"></div>
+
+    <!-- Logo -->
+    <div class="logo-area">
       <svg class="logo-symbol" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <rect x="42" y="10" width="16" height="80" fill="#0A0A0A"/>
         <polygon points="20,28 80,28 50,8" fill="#0A0A0A"/>
@@ -270,69 +334,40 @@
           <svg class="building-icon" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg">
             <rect x="2" y="8" width="20" height="28" fill="#0A0A0A"/>
             <polygon points="2,8 12,0 22,8" fill="#0A0A0A"/>
-            <rect x="6" y="14" width="3" height="3" fill="#FFFFFF"/>
-            <rect x="12" y="14" width="3" height="3" fill="#FFFFFF"/>
-            <rect x="18" y="14" width="3" height="3" fill="#FFFFFF"/>
-            <rect x="6" y="20" width="3" height="3" fill="#FFFFFF"/>
-            <rect x="12" y="20" width="3" height="3" fill="#FFFFFF"/>
-            <rect x="18" y="20" width="3" height="3" fill="#FFFFFF"/>
-            <rect x="6" y="26" width="3" height="3" fill="#FFFFFF"/>
-            <rect x="12" y="26" width="3" height="3" fill="#FFFFFF"/>
-            <rect x="18" y="26" width="3" height="3" fill="#FFFFFF"/>
+            <rect x="6" y="14" width="3" height="3" fill="#F5F3EE"/>
+            <rect x="12" y="14" width="3" height="3" fill="#F5F3EE"/>
+            <rect x="18" y="14" width="3" height="3" fill="#F5F3EE"/>
+            <rect x="6" y="20" width="3" height="3" fill="#F5F3EE"/>
+            <rect x="12" y="20" width="3" height="3" fill="#F5F3EE"/>
+            <rect x="18" y="20" width="3" height="3" fill="#F5F3EE"/>
+            <rect x="6" y="26" width="3" height="3" fill="#F5F3EE"/>
+            <rect x="12" y="26" width="3" height="3" fill="#F5F3EE"/>
+            <rect x="18" y="26" width="3" height="3" fill="#F5F3EE"/>
           </svg>
         </div>
         <div class="logo-flow">Flow Lab</div>
       </div>
     </div>
 
-    <!-- CONTEÚDO -->
-    <div class="content">
-      <div class="label">HUB DE I.A. PARA IMOBILIÁRIAS</div>
+    <!-- Tag superior direita -->
+    <div class="top-tag">HUB DE I.A. · IMOBILIÁRIAS</div>
 
-      <h1 class="headline">
-        A imobiliária<br>
-        que não automatiza<br>
-        hoje, vira<br>
-        <span class="highlight">espectadora</span><br>
-        amanhã.
-      </h1>
-
-      <p class="subtext">
-        Construímos <strong>Estruturas de I.A.</strong> que atendem, qualificam, agendam e fazem follow-up <strong>24h por dia</strong> — lado a lado com sua equipe comercial.
-      </p>
+    <!-- Área de guia (some quando você clica no botão) -->
+    <div class="text-area-guide">
+      <div class="guide-label">SUA ÁREA DE TEXTO AQUI</div>
     </div>
 
-    <!-- RODAPÉ -->
-    <div class="bottom">
-      <div class="divider"></div>
-
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-number">10x</div>
-          <div class="stat-label">+ Produtividade</div>
-        </div>
-        <div class="stat-separator"></div>
-        <div class="stat">
-          <div class="stat-number">65%</div>
-          <div class="stat-label">+ Crescimento</div>
-        </div>
-        <div class="stat-separator"></div>
-        <div class="stat">
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Atendimento</div>
-        </div>
-      </div>
-
-      <div class="footer">
-        <div class="footer-handle">@imobflowlab</div>
-        <div class="footer-tag">DM ABERTA · PRÓXIMOS CASES</div>
-      </div>
+    <!-- Rodapé -->
+    <div class="footer-area">
+      <div class="handle">@imobflowlab</div>
+      <div class="footer-tag">imobflowlab.com.br</div>
     </div>
 
   </div>
 </div>
 
 <div class="ratio-badge">1080 × 1350 · 4:5 Instagram Feed</div>
+<button class="toggle-btn" onclick="document.getElementById('post').classList.toggle('hide-guide')">Mostrar/ocultar guia de texto</button>
 
 </body>
 </html>
